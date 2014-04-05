@@ -5,39 +5,65 @@ evolveApp.controller('EvolveAppCtrl', function($scope, $http) {
         $http.get('http://localhost\:8090/evolve').
                 success(function(data) {
 
-            var dArray = new Array(data.maxX);
+            $scope.allData = data.data;
+            $scope.uuidToActor = {};
 
-            for (var x = 0; x < data.maxX; x++) {
-                dArray[x] = new Array(data.maxY);
-                for (var y = 0; y < data.maxY; y++) {
-                    var locationType = null;
-                    var gender = null;
-                    for (var z = 0; z < data.data[x][y].length; z++) {
-                        var innerLocType = data.data[x][y][z].locationType;
-                        var innerGenderType = data.data[x][y][z].gender;
-                        if (innerLocType != null) {
-                            locationType = innerLocType;
+            for (aOne in $scope.allData) {
+                for (aTwo in $scope.allData[aOne]) {
+                    for (aThree in $scope.allData[aOne][aTwo]) {
+                        actor = $scope.allData[aOne][aTwo][aThree]
+                        $scope.uuidToActor[actor.uuid] = actor;
+
+                        if (actor.gender != null) {
+                            actor.image = "img/komodo.jpg";
+                        } else if (actor.locationType == '~') {
+                            actor.image = "img/water.jpg";
+                        } else if (actor.locationType == '*') {
+                            actor.image = "img/fruit.jpg";
+                        } else {
+                            actor.image = "img/sand.jpg";
                         }
-                        if (innerGenderType != null) {
-                            gender = innerGenderType;
-                        }
-                    }
-                    if (gender !== null) {
-                        dArray[x][y] = "img/komodo.jpg";
-                    } else if (locationType === '~') {
-                        dArray[x][y] = "img/water.jpg";
-                    } else if (locationType === '*') {
-                        dArray[x][y] = "img/fruit.jpg";
-                    } else {
-                        dArray[x][y] = "img/sand.jpg";
                     }
                 }
             }
-
-
-            $scope.allData = dArray;
-
         });
     }, 500);
+
+    $scope.sortByAge = function(actorList) {
+        var newList = actorList.sort(function(x, y) {
+            var xAge = x.ageCurrent;
+            var yAge = y.ageCurrent;
+
+            if (xAge === undefined && yAge === undefined) {
+                return 0;
+            } else if (xAge === undefined) {
+                return 1;
+            } else if (yAge === undefined) {
+                return  -1;
+            } else {
+                return yAge - xAge;
+            }
+
+        });
+        return newList;
+    };
+
+    $scope.setXandY = function(x, y) {
+        $scope.x = x;
+        $scope.y = y;
+        console.log(x)
+    };
+
+    $scope.selectActor = function(actor) {
+        console.log(actor + " " + actor.uuid)
+        $scope.uuidOfSelcted = actor.uuid;
+    };
+    $scope.getSelected = function() {
+        if ($scope.uuidOfSelcted === undefined) {
+            return;
+        } else {
+            return $scope.uuidToActor[$scope.uuidOfSelcted];
+        }
+    };
 }
 );
