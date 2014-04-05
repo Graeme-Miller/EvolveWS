@@ -1,1 +1,5 @@
-/*style.css*/
+
+table.tab {font-size:12px;color:#333333;width:100%;border-width: 1px;border-color: #729ea5;border-collapse: collapse;}
+table.tab th {font-size:12px;background-color:#acc8cc;border-width: 1px;padding: 8px;border-style: solid;border-color: #729ea5;text-align:left;}
+table.tab tr {background-color:#ffffff;}
+table.tab td {font-size:12px;border-width: 1px;padding: 8px;border-style: solid;border-color: #729ea5;}

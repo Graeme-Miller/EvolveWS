@@ -51,11 +51,9 @@ evolveApp.controller('EvolveAppCtrl', function($scope, $http) {
     $scope.setXandY = function(x, y) {
         $scope.x = x;
         $scope.y = y;
-        console.log(x)
     };
 
     $scope.selectActor = function(actor) {
-        console.log(actor + " " + actor.uuid)
         $scope.uuidOfSelcted = actor.uuid;
     };
     $scope.getSelected = function() {
