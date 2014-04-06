@@ -27,7 +27,7 @@ evolveApp.controller('EvolveAppCtrl', function($scope, $http) {
                 }
             }
         });
-    }, 500);
+    }, 1000);
 
     $scope.sortByAge = function(actorList) {
         var newList = actorList.sort(function(x, y) {
@@ -63,5 +63,15 @@ evolveApp.controller('EvolveAppCtrl', function($scope, $http) {
             return $scope.uuidToActor[$scope.uuidOfSelcted];
         }
     };
+
+    $scope.zoomOptions = [
+        {name: '25%', px: '15px'},
+        {name: '50%', px: '21.21px'},
+        {name: '75%', px: '25.98px'},
+        {name: '100%', px: '30px'},
+        {name: '125%', px: '33.54px'},
+        {name: '150%', px: '36.74px'}
+    ];
+    $scope.zoom = $scope.zoomOptions[3];
 }
 );
