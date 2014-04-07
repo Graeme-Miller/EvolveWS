@@ -72,6 +72,6 @@ evolveApp.controller('EvolveAppCtrl', function($scope, $http) {
         {name: '125%', px: '33.54px'},
         {name: '150%', px: '36.74px'}
     ];
-    $scope.zoom = $scope.zoomOptions[3];
+    $scope.zoom = $scope.zoomOptions[0];
 }
 );
