@@ -7,14 +7,22 @@ evolveApp.controller('EvolveAppCtrl', function($scope, $http) {
 
             $scope.allData = data.data;
             $scope.uuidToActor = {};
+            $scope.allActors = [];
+            $scope.genderSet = {};
+            $scope.speciesSet = {};
+            
 
             for (aOne in $scope.allData) {
                 for (aTwo in $scope.allData[aOne]) {
                     for (aThree in $scope.allData[aOne][aTwo]) {
                         actor = $scope.allData[aOne][aTwo][aThree]
-                        $scope.uuidToActor[actor.uuid] = actor;
 
                         if (actor.gender != null) {
+                            $scope.uuidToActor[actor.uuid] = actor;
+                            $scope.allActors.push(actor);
+                            
+                            $scope.genderSet[actor.gender] = true;
+                            $scope.speciesSet[actor.species] = true;
                             actor.image = "img/komodo.jpg";
                         } else if (actor.locationType == '~') {
                             actor.image = "img/water.jpg";
@@ -64,6 +72,7 @@ evolveApp.controller('EvolveAppCtrl', function($scope, $http) {
         }
     };
 
+//Zoom Setup
     $scope.zoomOptions = [
         {name: '25%', px: '15px'},
         {name: '50%', px: '21.21px'},
@@ -73,5 +82,6 @@ evolveApp.controller('EvolveAppCtrl', function($scope, $http) {
         {name: '150%', px: '36.74px'}
     ];
     $scope.zoom = $scope.zoomOptions[0];
+
 }
 );

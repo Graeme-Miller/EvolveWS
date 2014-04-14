@@ -40,7 +40,7 @@
                     </table>
                 </div>
         </div>
-        <div style="height: 30%">
+        <div style="height: 30%; overflow:scroll;" >
             <table class="tab">
                 <thead>
                     <tr>
@@ -56,162 +56,49 @@
                         <th>Max Age</th>
                     </tr>
                     <tr>
-                        <td>A</td>
-                        <td>A</td>
-                        <td>A</td>
-                        <td>A</td>
-                        <td>A</td>
-                        <td>A</td>
-                        <td>A</td>
-                        <td>A</td>
-                        <td>A</td>
-                        <td>A</td>
+                        <td></td>
+                        <td>
+                            <select ng-model="selectedSpecies" ng-options="key as key for (key,value) in speciesSet">
+                                <option value="">--species--</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select ng-model="selectedGender" ng-options="key as key for (key,value) in genderSet">
+                                <option value="">--gender--</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select ng-model="selectedPregnancy">
+                                <option value="">--pregnancy--</option>
+                                <option value="true">true</option>
+                                <option value="false">false</option>
+                            </select>
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>1</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>2</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>3</td>
-                        <td>3</td>
-                        <td>3</td>
-                        <td>3</td>
-                        <td>3</td>
-                        <td>3</td>
-                        <td>3</td>
-                        <td>3</td>
-                        <td>3</td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>4</td>
-                        <td>4</td>
-                        <td>4</td>
-                        <td>4</td>
-                        <td>4</td>
-                        <td>4</td>
-                        <td>4</td>
-                        <td>4</td>
-                        <td>4</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>2</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>2</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>2</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>2</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>2</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>2</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>2</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>2</td>
+                    
+                    <tr ng-repeat="actor in allActors | filter:{
+                        gender:selectedGender||undefined,
+                        pregnant:selectedPregnancy||undefined, 
+                        species:selectedSpecies||undefined                        
+                        }">  
+                        <td>{{actor.uuid}}</td>                        
+                        <td>{{actor.species}}</td>
+                        <td>{{actor.gender}}</td>
+                        <td>{{actor.pregnant}}</td>
+                        <td>{{actor.pregnancyCountdown}}</td>
+                        <td>{{actor.hunger}}</td>
+                        <td>{{actor.thirst}}</td>
+                        <td>{{actor.sex}}</td>
+                        <td>{{actor.ageCurrent}}</td>
+                        <td>{{actor.ageMax}}</td>
                     </tr>
                 </tbody>
             </table>
