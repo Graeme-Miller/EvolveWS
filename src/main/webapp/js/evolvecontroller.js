@@ -17,7 +17,9 @@ evolveApp.controller('EvolveAppCtrl', function($scope, $http) {
                     for (aThree in $scope.allData[aOne][aTwo]) {
                         actor = $scope.allData[aOne][aTwo][aThree]
 
-                        if (actor.gender != null) {
+                        if (actor.vegativePropagation != null) {
+                            actor.image = "img/vine.jpg";
+                        } else if (actor.gender != null) {
                             $scope.uuidToActor[actor.uuid] = actor;
                             $scope.allActors.push(actor);
                             
