@@ -16,19 +16,17 @@ evolveApp.controller('EvolveAppCtrl', function($scope, $http) {
                 for (aTwo in $scope.allData[aOne]) {
                     for (aThree in $scope.allData[aOne][aTwo]) {
                         actor = $scope.allData[aOne][aTwo][aThree]
-                                     
+                        $scope.uuidToActor[actor.uuid] = actor;
                         if (actor.species == "seed") {
-                            $scope.uuidToActor[actor.uuid] = actor;
+                           
                             actor.image = "img/vine.jpg";
                         }else if (actor.species == "plant") {
-                            $scope.uuidToActor[actor.uuid] = actor;
                     //        if(actor.gender == 'M') {
                                 actor.image = "img/fruit.jpg";
                      //       } else {
                      //           actor.image = "img/lillies.jpg";
                      //       }
                         } else if (actor.gender != null) {
-                            $scope.uuidToActor[actor.uuid] = actor;
                             $scope.allActors.push(actor);
 
                             $scope.genderSet[actor.gender] = true;
