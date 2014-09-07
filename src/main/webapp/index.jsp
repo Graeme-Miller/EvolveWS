@@ -17,14 +17,16 @@
                 <table cellspacing="0" cellpadding="0">
                     <tr ng-repeat="someData in allData track by $index">
                         <td ng-repeat="mydata in someData track by $index">                                      
-                            <img style="width: {{zoom.px}}; height: {{zoom.px}}" ng-src="{{selected = sortByAge(mydata)[0]; selected.image}}" ng-click="setXandY($index, $parent.$index); selectActor(selected)">
+                            <img ng-if="mode=='pic'" style="width: {{zoom.px}}; height: {{zoom.px}}" ng-src="{{selected = sortByAge(mydata)[0]; selected.image}}" ng-click="setXandY($index, $parent.$index); selectActor(selected)">
+                            <div ng-if="mode=='species'" style="width: {{zoom.px}}; height: {{zoom.px}}; background-color:{{selected = sortByAge(mydata)[0]; selected.speciesColour}};" ng-click="setXandY($index, $parent.$index); selectActor(selected)"/>
                         </td>
                     </tr>
                 </table>
             </div>
             <div style="float: left;  width: 20%; height: 25%;">
                 <p class="cpanelhead">CONTROL PANEL</p>
-                <span class="cpanelbody">ZOOM: </span><select class="cpanelbody" ng-model="zoom" ng-options="zo.name for zo in zoomOptions"></select>
+                <span class="cpanelbody">ZOOM: </span><select class="cpanelbody" ng-model="zoom" ng-options="zo.name for zo in zoomOptions"></select><br/>
+                <span class="cpanelbody">MODE: </span><select class="cpanelbody" ng-model="mode" ng-options="modeOption for modeOption in modeOptions"></select>
             </div>
             <br>
                 <div style="float: left;  width: 20%; height: 75%;">

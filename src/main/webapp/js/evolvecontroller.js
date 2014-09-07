@@ -17,15 +17,17 @@ evolveApp.controller('EvolveAppCtrl', function($scope, $http) {
                     for (aThree in $scope.allData[aOne][aTwo]) {
                         actor = $scope.allData[aOne][aTwo][aThree]
                         $scope.uuidToActor[actor.uuid] = actor;
-                        if (actor.species == "seed") {
-                           
+                        if (actor.clazz == "seed") {
+
                             actor.image = "img/vine.jpg";
-                        }else if (actor.species == "plant") {
-                    //        if(actor.gender == 'M') {
+                            actor.speciesColour = getFromOrAddToMap(actor.species)
+                        } else if (actor.clazz == "plant") {
+                            if (actor.waterNeed > 40) {
                                 actor.image = "img/fruit.jpg";
-                     //       } else {
-                     //           actor.image = "img/lillies.jpg";
-                     //       }
+                            } else {
+                                actor.image = "img/cactus.jpg";
+                            }
+                            actor.speciesColour = getFromOrAddToMap(actor.species)
                         } else if (actor.gender != null) {
                             $scope.allActors.push(actor);
 
@@ -34,16 +36,16 @@ evolveApp.controller('EvolveAppCtrl', function($scope, $http) {
                             actor.image = "img/komodo.jpg";
                         } else if (actor.locationType == '~') {
                             actor.image = "img/water.jpg";
-                        } else if (actor.locationType == '*') {
-                            actor.image = "img/fruit.jpg";
+                            actor.speciesColour = "#FFFFFF"
                         } else {
                             actor.image = "img/sand.jpg";
+                            actor.speciesColour = '#000000'
                         }
                     }
                 }
             }
         });
-    }, 1000);
+    }, 100);
 
     $scope.sortByAge = function(actorList) {
         var newList = actorList.sort(function(x, y) {
@@ -91,5 +93,28 @@ evolveApp.controller('EvolveAppCtrl', function($scope, $http) {
     ];
     $scope.zoom = $scope.zoomOptions[0];
 
+    $scope.modeOptions = [
+        'pic', 'species'
+    ];
+    $scope.mode = $scope.modeOptions[0];
+
 }
 );
+
+speciesMap = {}
+function getFromOrAddToMap(speciesNumber) {
+    if (!(speciesNumber in speciesMap)) {        
+        speciesMap[speciesNumber] = getRandomColor();
+    }
+    console.log("returning colour2 "+speciesMap[speciesNumber])
+    return speciesMap[speciesNumber];
+}
+function getRandomColor() {
+    var letters = '0123456789ABCDEF'.split('');
+    var colour = '#';
+    for (var i = 0; i < 6; i++) {
+        colour += letters[Math.round(Math.random() * 15)];
+    }
+    console.error("returning colour "+colour)
+    return colour;
+}
