@@ -103,10 +103,21 @@ evolveApp.controller('EvolveAppCtrl', function($scope, $http) {
 
 speciesMap = {}
 function getFromOrAddToMap(speciesNumber) {
-    if (!(speciesNumber in speciesMap)) {        
-        speciesMap[speciesNumber] = getRandomColor();
+    if (!(speciesNumber in speciesMap)) {
+        var parent = speciesNumber.substring(0, speciesNumber.length - 1);
+        var lastChar =  speciesNumber.substring(speciesNumber.length - 1, speciesNumber.length);
+        console.error("parent " + parent)
+        console.error("lastChar " + lastChar)
+        console.error("parent in speciesMap " + parent in speciesMap)
+        console.error( lastChar === '0')
+        if (parent in speciesMap && lastChar === '0') {
+            speciesMap[speciesNumber] = speciesMap[parent]
+        } else {
+            speciesMap[speciesNumber] = getRandomColor();
+        }
+
     }
-    console.log("returning colour2 "+speciesMap[speciesNumber])
+   
     return speciesMap[speciesNumber];
 }
 function getRandomColor() {
@@ -114,7 +125,6 @@ function getRandomColor() {
     var colour = '#';
     for (var i = 0; i < 6; i++) {
         colour += letters[Math.round(Math.random() * 15)];
-    }
-    console.error("returning colour "+colour)
+    }    
     return colour;
 }
