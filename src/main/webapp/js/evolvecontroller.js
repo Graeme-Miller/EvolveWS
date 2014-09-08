@@ -17,8 +17,10 @@ evolveApp.controller('EvolveAppCtrl', function($scope, $http) {
                     for (aThree in $scope.allData[aOne][aTwo]) {
                         actor = $scope.allData[aOne][aTwo][aThree]
                         $scope.uuidToActor[actor.uuid] = actor;
-                        if (actor.clazz == "seed") {
-
+                        if (actor.clazz == "deathclazz") {
+                            actor.image = "img/ghost.jpg";
+                            actor.speciesColour = "#C0C0C0"
+                        } else if (actor.clazz == "seed") {
                             actor.image = "img/vine.jpg";
                             actor.speciesColour = getFromOrAddToMap(actor.species)
                         } else if (actor.clazz == "plant") {
@@ -105,11 +107,11 @@ speciesMap = {}
 function getFromOrAddToMap(speciesNumber) {
     if (!(speciesNumber in speciesMap)) {
         var parent = speciesNumber.substring(0, speciesNumber.length - 1);
-        var lastChar =  speciesNumber.substring(speciesNumber.length - 1, speciesNumber.length);
+        var lastChar = speciesNumber.substring(speciesNumber.length - 1, speciesNumber.length);
         console.error("parent " + parent)
         console.error("lastChar " + lastChar)
         console.error("parent in speciesMap " + parent in speciesMap)
-        console.error( lastChar === '0')
+        console.error(lastChar === '0')
         if (parent in speciesMap && lastChar === '0') {
             speciesMap[speciesNumber] = speciesMap[parent]
         } else {
@@ -117,7 +119,7 @@ function getFromOrAddToMap(speciesNumber) {
         }
 
     }
-   
+
     return speciesMap[speciesNumber];
 }
 function getRandomColor() {
@@ -125,6 +127,6 @@ function getRandomColor() {
     var colour = '#';
     for (var i = 0; i < 6; i++) {
         colour += letters[Math.round(Math.random() * 15)];
-    }    
+    }
     return colour;
 }
